@@ -1,4 +1,4 @@
-# opendigitalradio/docker-dabmux
+# opendigitalradio/docker-dabmod
 
 ## Introduction
 This repository is part of a project aiming at containerizing the [mmbTools](https://www.opendigitalradio.org/mmbtools) software stack of [Open Digital Radio](https://www.opendigitalradio.org/).
