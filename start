@@ -8,5 +8,5 @@ if test -f "/usr/share/zoneinfo/${TZ}"; then
     ln "/usr/share/zoneinfo/${TZ}" /etc/localtime
 fi
 
-# Start the mux
+# Start the modulator
 odr-dabmod "${1}"
