@@ -1,9 +1,11 @@
 name: docker-publish
 on:
-  push:
-    paths:
-      - 'Dockerfile'
-      - 'start'
+# push temporarilly disabled
+#  push:
+#    paths:
+#      - 'Dockerfile'
+#      - 'start'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
