@@ -10,7 +10,7 @@ This repository features the [dab modulator](https://github.com/opendigitalradio
     ```
     TZ=your_time_zone (ex: Europe/Zurich)
     ```
-1. Declare your mux configuration file:
+1. Declare your modulator configuration file:
     ```
     # case-1: you have a config file
     MOD_CONFIG=full_path_to_your_dabmux_configuration_file
@@ -43,7 +43,7 @@ This repository features the [dab modulator](https://github.com/opendigitalradio
         --network odr \
         --publish 9400:9400 \
         --device=${TX_DEV} \
-        --volume ${MOD_CONFIG}:/mnt/mux.ini
+        --volume ${MOD_CONFIG}:/mnt/mux.ini \
         opendigitalradio/dabmod:latest \
         /mnt/mux.ini
     ```
