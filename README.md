@@ -6,19 +6,16 @@ This repository is part of a project aiming at containerizing the [mmbTools](htt
 This repository features the [dab modulator](https://github.com/opendigitalradio/ODR-DabMod) component. 
 
 ## Quick setup
+1. Get this repository on your host
 1. Declare your time zone:
     ```
     TZ=your_time_zone (ex: Europe/Zurich)
     ```
-1. Declare your modulator configuration file:
+1. Declare your modulator configuration file.
     ```
-    # case-1: you have a config file
-    MOD_CONFIG=full_path_to_your_dabmux_configuration_file
-
-    # case-2: you dont't have a config file. Take the sample from this repository
-    MOD_CONFIG=./odr-data/odr-dabmod.ini
+    MOD_CONFIG=$(pwd)/odr-data/odr-dabmod.ini
     ```
-1. Ensure the modulator configuration file suits your needs (ex: output type and output power) and local environments (ex: DAB channel)
+1. If DAB channel 5A is unavailable in your location, then adapt the configuration file
 1. Plug the USB SoapySDR-compatible transceiver before you run the container
 1. Declare your transceiver device
     ```
@@ -43,7 +40,7 @@ This repository features the [dab modulator](https://github.com/opendigitalradio
         --network odr \
         --publish 9400:9400 \
         --device=${TX_DEV} \
-        --volume ${MOD_CONFIG}:/mnt/mux.ini \
+        --volume ${MOD_CONFIG}:/mnt/mod.ini \
         opendigitalradio/dabmod:latest \
-        /mnt/mux.ini
+        /mnt/mod.ini
     ```
