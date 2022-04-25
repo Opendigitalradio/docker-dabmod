@@ -20,7 +20,7 @@ RUN  apt-get install --yes \
           libsoapysdr-dev \
           libuhd-dev \
           libzmq3-dev  
-ARG  URL=ODR-DabMod/archive/refs/tags/v2.5.0.tar.gz
+ARG  URL=ODR-DabMod/archive/refs/tags/v2.6.0.tar.gz
 RUN  cd /root && \
      curl -L https://github.com/Opendigitalradio/${URL} | tar -xz && \
      cd ODR* && \
