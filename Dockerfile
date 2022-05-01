@@ -25,7 +25,7 @@ RUN  cd /root && \
      curl -L https://github.com/Opendigitalradio/${URL} | tar -xz && \
      cd ODR* && \
      ./bootstrap.sh && \
-     ./configure --enable-limesdr --enable-bladerf --enable-fast-math && \
+     ./configure --enable-limesdr --enable-bladerf --enable-fast-math --disable-native && \
      make && make install 
 
 # Build the final image
