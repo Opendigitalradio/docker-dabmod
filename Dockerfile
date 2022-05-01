@@ -26,7 +26,7 @@ RUN  cd /root \
 
 # Build the final image
 FROM ubuntu:22.04
-ARG  DEBIAN_FRONTEND=noninteractive
+ENV  DEBIAN_FRONTEND=noninteractive
 ## Update system and install specific libraries
 RUN  apt-get update \
      && apt-get upgrade --yes \
