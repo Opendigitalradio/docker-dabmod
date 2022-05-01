@@ -1,9 +1,9 @@
 # Build odr-dabmod
 FROM debian:bullseye-slim AS builder
 ENV  DEBIAN_FRONTEND=noninteractive
-RUN  apt-get update && \
-     apt-get upgrade --yes && \
-     apt-get install --yes \
+RUN  apt-get update \
+     && apt-get upgrade --yes \
+     && apt-get install --yes \
           apt-utils
 RUN  apt-get install --yes \
           automake \
@@ -21,20 +21,21 @@ RUN  apt-get install --yes \
           libuhd-dev \
           libzmq3-dev  
 ARG  URL=ODR-DabMod/archive/refs/tags/v2.6.0.tar.gz
-RUN  cd /root && \
-     curl -L https://github.com/Opendigitalradio/${URL} | tar -xz && \
-     cd ODR* && \
-     ./bootstrap.sh && \
-     ./configure --enable-limesdr --enable-bladerf --enable-fast-math --disable-native && \
-     make && make install 
+RUN  cd /root \
+     && curl -L https://github.com/Opendigitalradio/${URL} | tar -xz \
+     && cd ODR* \
+     && ./bootstrap.sh \
+     && ./configure --enable-limesdr --enable-bladerf --enable-fast-math --disable-native \
+     && make \
+     && make install 
 
 # Build the final image
 FROM debian:bullseye-slim
 ARG  DEBIAN_FRONTEND=noninteractive
 ## Update system
-RUN  apt-get update && \
-     apt-get upgrade --yes && \
-     apt-get install --yes \
+RUN  apt-get update \
+     && apt-get upgrade --yes \
+     && apt-get install --yes \
           apt-utils
 ## Install specific packages
 RUN  apt-get install --yes \
@@ -44,8 +45,8 @@ RUN  apt-get install --yes \
           liblimesuite20.10-1 \
           libsoapysdr0.7 \
           libuhd3.15.0 \
-          libzmq5 && \
-     rm -rf /var/lib/apt/lists/*
+          libzmq5 \
+     && rm -rf /var/lib/apt/lists/*
 ## Document image
 LABEL org.opencontainers.image.vendor="Open Digital Radio" 
 LABEL org.opencontainers.image.description="DAB/DAB+ Modulator" 
