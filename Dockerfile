@@ -43,8 +43,8 @@ RUN  chmod 0755 /usr/local/bin/start \
           libcurl4 \
           libfftw3-3 \
           liblimesuite20.10-1 \
-          libsoapysdr0.7 \
-          libuhd3.15.0 \
+          libsoapysdr0.8 \
+          libuhd4.1.0 \
           libzmq5 \
      && rm -rf /var/lib/apt/lists/*
 
