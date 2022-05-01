@@ -1,5 +1,8 @@
 # Build odr-dabmod
 FROM ubuntu:22.04 AS builder
+ARG  URL_BASE=https://github.com/Opendigitalradio
+ARG  SOFTWARE=ODR-DabMod/archive/refs/tags
+ARG  VERSION=v2.6.0
 ENV  DEBIAN_FRONTEND=noninteractive
 ## Update system
 RUN  apt-get update \
@@ -10,17 +13,16 @@ RUN  apt-get install --yes \
           curl \
           make \
           pkg-config
-## Install development libraries
+## Install development libraries and build
 RUN  apt-get install --yes \
           libbladerf-dev \
           libfftw3-dev \
           liblimesuite-dev \
           libsoapysdr-dev \
           libuhd-dev \
-          libzmq3-dev  
-ARG  URL=ODR-DabMod/archive/refs/tags/v2.6.0.tar.gz
-RUN  cd /root \
-     && curl -L https://github.com/Opendigitalradio/${URL} | tar -xz \
+          libzmq3-dev \
+     && cd /root \
+     && curl -L ${URL_BASE}/${SOFTWARE}/${VERSION}.tar.gz | tar -xz \
      && cd ODR* \
      && ./bootstrap.sh \
      && ./configure --enable-limesdr --enable-bladerf --enable-fast-math --disable-native \
