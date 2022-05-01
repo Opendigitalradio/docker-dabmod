@@ -1,13 +1,16 @@
 # Build odr-dabmod
 FROM ubuntu:22.04 AS builder
 ENV  DEBIAN_FRONTEND=noninteractive
+## Update system
 RUN  apt-get update \
-     && apt-get upgrade --yes \
-     && apt-get install --yes \
+     && apt-get upgrade --yes
+## Install build packages
+RUN  apt-get install --yes \
           autoconf \
           curl \
           make \
           pkg-config
+## Install development libraries
 RUN  apt-get install --yes \
           libbladerf-dev \
           libfftw3-dev \
@@ -27,11 +30,15 @@ RUN  cd /root \
 # Build the final image
 FROM ubuntu:22.04
 ENV  DEBIAN_FRONTEND=noninteractive
-## Update system and install specific libraries
+## Update system
 RUN  apt-get update \
-     && apt-get upgrade --yes \
-## Install specific packages
-RUN  apt-get install --yes \
+     && apt-get upgrade --yes
+## Copy objects built in the builder phase
+COPY --from=builder /usr/local/bin/* /usr/bin/
+COPY start /usr/local/bin/
+## Install production libraries
+RUN  chmod 0755 /usr/local/bin/start \
+     && apt-get install --yes \
           libbladerf2 \
           libcurl4 \
           libfftw3-3 \
@@ -40,14 +47,9 @@ RUN  apt-get install --yes \
           libuhd3.15.0 \
           libzmq5 \
      && rm -rf /var/lib/apt/lists/*
-## Document image
+
+EXPOSE 9400
+ENTRYPOINT ["start"]
 LABEL org.opencontainers.image.vendor="Open Digital Radio" 
 LABEL org.opencontainers.image.description="DAB/DAB+ Modulator" 
 LABEL org.opencontainers.image.authors="robin.alexander@netplus.ch" 
-## Copy objects built in the builder phase
-COPY --from=builder /usr/local/bin/* /usr/bin/
-COPY start /usr/local/bin/
-## Customization
-RUN  chmod 0755 /usr/local/bin/start
-EXPOSE 9400
-ENTRYPOINT ["start"]
