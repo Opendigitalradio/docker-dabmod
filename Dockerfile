@@ -1,5 +1,5 @@
 # Build odr-dabmod
-FROM debian:bullseye-slim AS builder
+FROM ubuntu:22.04 AS builder
 ENV  DEBIAN_FRONTEND=noninteractive
 RUN  apt-get update \
      && apt-get upgrade --yes \
@@ -30,7 +30,7 @@ RUN  cd /root \
      && make install 
 
 # Build the final image
-FROM debian:bullseye-slim
+FROM ubuntu:22.04
 ARG  DEBIAN_FRONTEND=noninteractive
 ## Update system
 RUN  apt-get update \
