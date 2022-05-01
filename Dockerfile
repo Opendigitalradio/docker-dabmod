@@ -4,17 +4,12 @@ ENV  DEBIAN_FRONTEND=noninteractive
 RUN  apt-get update \
      && apt-get upgrade --yes \
      && apt-get install --yes \
-          apt-utils
-RUN  apt-get install --yes \
-          automake \
-          build-essential \
+          autoconf \
           curl \
-          git \
-          libtool \
+          make \
           pkg-config
 RUN  apt-get install --yes \
           libbladerf-dev \
-          libcurl4-openssl-dev \
           libfftw3-dev \
           liblimesuite-dev \
           libsoapysdr-dev \
@@ -32,11 +27,9 @@ RUN  cd /root \
 # Build the final image
 FROM ubuntu:22.04
 ARG  DEBIAN_FRONTEND=noninteractive
-## Update system
+## Update system and install specific libraries
 RUN  apt-get update \
      && apt-get upgrade --yes \
-     && apt-get install --yes \
-          apt-utils
 ## Install specific packages
 RUN  apt-get install --yes \
           libbladerf2 \
