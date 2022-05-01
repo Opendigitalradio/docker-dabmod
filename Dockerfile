@@ -1,6 +1,6 @@
 # Build odr-dabmod
 FROM debian:bullseye-slim AS builder
-ARG  DEBIAN_FRONTEND=noninteractive
+ENV  DEBIAN_FRONTEND=noninteractive
 RUN  apt-get update && \
      apt-get upgrade --yes && \
      apt-get install --yes \
