@@ -11,11 +11,15 @@ This repository features the [dab modulator](https://github.com/opendigitalradio
     ```
     TZ=your_time_zone (ex: Europe/Zurich)
     ```
-1. Declare your modulator configuration file.
+1. Declare your modulator configuration file
     ```
-    MOD_CONFIG=$(pwd)/odr-data/odr-dabmod.ini
+    # Example: this repository configuration file
+    MOD_CONFIG=your_configuration_file (ex: $(pwd)/odr-data/odr-dabmod.ini)
     ```
 1. If DAB channel 5A is unavailable in your location, then adapt the configuration file
+    ```
+    sed -e "s/channel=5A/channel=new_channel/" -i ${MOF_CONFIG}
+    ```
 1. Plug the USB SoapySDR-compatible transceiver before you run the container
 1. Declare your transceiver device
     ```
