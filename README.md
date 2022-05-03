@@ -1,3 +1,5 @@
+[![docker-publish](https://github.com/Opendigitalradio/docker-dabmod/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Opendigitalradio/docker-dabmod/actions/workflows/docker-publish.yml)
+
 # opendigitalradio/docker-dabmod
 
 ## Introduction
@@ -9,12 +11,11 @@ This repository features the [dab modulator](https://github.com/opendigitalradio
 1. Get this repository on your host
 1. Declare your time zone:
     ```
-    TZ=your_time_zone (ex: Europe/Zurich)
+    TZ=your_time_zone (ex: TZ=Europe/Zurich)
     ```
 1. Declare your modulator configuration file
     ```
-    # Example: this repository configuration file
-    MOD_CONFIG=your_configuration_file (ex: $(pwd)/odr-data/odr-dabmod.ini)
+    MOD_CONFIG=$(pwd)/config/odr-dabmod.ini
     ```
 1. If DAB channel 5A is unavailable in your location, then adapt the configuration file
     ```
@@ -44,7 +45,7 @@ This repository features the [dab modulator](https://github.com/opendigitalradio
         --network odr \
         --publish 9400:9400 \
         --device=${TX_DEV} \
-        --volume ${MOD_CONFIG}:/mnt/mod.ini \
+        --volume ${MOD_CONFIG}:/config/mod.ini \
         opendigitalradio/dabmod:latest \
-        /mnt/mod.ini
+        /config/mod.ini
     ```
