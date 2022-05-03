@@ -48,6 +48,7 @@ RUN  chmod 0755 /usr/local/bin/start \
           libsoapysdr0.8 \
           libuhd4.1.0 \
           libzmq5 \
+          tzdata \
      && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 9400
